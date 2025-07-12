@@ -9,7 +9,6 @@ interface Characters {
 class CardList extends Component<Characters, unknown> {
   render() {
     const { characters } = this.props;
-    console.log(characters);
     return (
       <div>
         <h2>Characters:</h2>

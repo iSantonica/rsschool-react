@@ -15,14 +15,21 @@ interface SearchState {
 }
 
 class Search extends Component<unknown, SearchState> {
-  state: SearchState = {
-    isLoading: false,
-    characters: [],
-    searchTerm: '',
-  };
+  constructor(props: unknown) {
+    super(props);
 
-  fetchCharacter = async () => {
-    const searchLink = `${BASE_URL}people/?name=${this.state.searchTerm}&expanded=true`;
+    const savedSearchTerm = localStorage.getItem('rss:search') || '';
+
+    this.state = {
+      isLoading: false,
+      characters: [],
+      searchTerm: savedSearchTerm,
+    };
+  }
+
+  fetchCharacter = async (): Promise<void> => {
+    const searchTerm = this.state.searchTerm;
+    const searchLink = `${BASE_URL}people/?name=${searchTerm}&expanded=true`;
 
     try {
       this.setState({ isLoading: true });
@@ -32,9 +39,12 @@ class Search extends Component<unknown, SearchState> {
 
       const data = await response.json();
 
-      if (!data.results) throw new Error('Character not found');
+      if (!data.results && !data.result)
+        throw new Error(data.message || 'Character not found');
 
-      this.setState({ characters: data.results });
+      const searchResults = searchTerm ? data.result : data.results;
+
+      this.setState({ characters: searchResults });
     } catch (error) {
       console.error(error);
     } finally {
@@ -42,10 +52,7 @@ class Search extends Component<unknown, SearchState> {
     }
   };
 
-  componentDidMount(): void {
-    this.setState({ searchTerm: localStorage.getItem('rss:search') || '' });
-    console.log(this.state.searchTerm);
-    console.log('didMount');
+  async componentDidMount(): Promise<void> {
     this.fetchCharacter();
   }
 
