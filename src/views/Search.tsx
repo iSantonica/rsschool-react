@@ -3,24 +3,27 @@ import { Component } from 'react';
 import Header from '../components/layout/Header';
 import Main from '../components/layout/Main';
 import SearchForm from '../components/common/SearchForm';
+import CardList from '../components/common/CardList';
 
 const BASE_URL = 'https://swapi.tech/api/';
 
-interface Character {
-  name: string;
-  birthYear: string;
-  eyeColor: string;
-  gender: string;
-  hairColor: string;
-  skinColor: string;
-  height: string;
-  mass: string;
-  homeworld: string;
+export interface SWCharacter {
+  uid: string;
+  properties: {
+    name: string;
+    birth_year: string;
+    eye_color: string;
+    gender: string;
+    hair_color: string;
+    skin_color: string;
+    height: string;
+    mass: string;
+  };
 }
 
 interface SearchState {
   isLoading: boolean;
-  characters: Character[];
+  characters: SWCharacter[];
   searchTerm: string;
 }
 
@@ -65,7 +68,9 @@ class Search extends Component<unknown, SearchState> {
         <Header>
           <SearchForm />
         </Header>
-        <Main>Results</Main>
+        <Main>
+          <CardList characters={this.state.characters} />
+        </Main>
       </div>
     );
   }

@@ -92,3 +92,39 @@ input:focus-visible {
 .search-form input {
   margin-right: 10px;
 }
+
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 0;
+}
+
+.card {
+  background: #1e1e2f;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 12px;
+  color: #f1f1f1;
+  list-style: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  max-width: 300px;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 0 0 4px rgba(100, 108, 255, 0.3);
+}
+
+.card__name {
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+  border-bottom: 1px solid #444;
+  padding-bottom: 4px;
+}
+
+.card__details {
+  padding-left: 0;
+  list-style: none;
+  line-height: 1.6;
+}
