@@ -63,7 +63,12 @@ class Search extends Component<unknown, SearchState> {
           <SearchForm />
         </Header>
         <Main>
-          <CardList characters={this.state.characters} />
+          <h2>Characters:</h2>
+          {this.state.isLoading ? (
+            <div className="loader" aria-label="Loading"></div>
+          ) : (
+            <CardList characters={this.state.characters} />
+          )}
         </Main>
       </div>
     );

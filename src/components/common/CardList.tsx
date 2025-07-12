@@ -11,7 +11,6 @@ class CardList extends Component<Characters, unknown> {
     const { characters } = this.props;
     return (
       <div>
-        <h2>Characters:</h2>
         <ul className="card-list">
           {characters.map((character) => (
             <Card key={character.uid} character={character} />
