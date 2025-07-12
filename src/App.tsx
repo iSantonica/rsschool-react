@@ -1,12 +1,15 @@
 import { Component } from 'react';
 import Search from './views/Search';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <ErrorBoundary
+        fallback={<p className="fallback-error">Something went wrong!!!</p>}
+      >
         <Search />
-      </div>
+      </ErrorBoundary>
     );
   }
 }

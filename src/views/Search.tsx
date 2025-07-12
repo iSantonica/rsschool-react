@@ -6,6 +6,8 @@ import Main from '../components/layout/Main';
 import SearchForm from '../components/common/SearchForm';
 import CardList from '../components/common/CardList';
 import Loader from '../components/common/Loader';
+import Footer from '../components/layout/Footer';
+import BuggyButton from '../components/ErrorBoundary/BuggyButton';
 
 const BASE_URL = 'https://swapi.tech/api/';
 
@@ -88,6 +90,9 @@ class Search extends Component<unknown, SearchState> {
             <CardList characters={this.state.characters} />
           )}
         </Main>
+        <Footer>
+          <BuggyButton />
+        </Footer>
       </div>
     );
   }

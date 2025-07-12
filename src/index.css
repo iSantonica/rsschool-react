@@ -143,6 +143,32 @@ input:focus-visible {
   box-shadow: 0 0 8px rgba(100, 108, 255, 0.6);
 }
 
+.buggy-button {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.buggy-button:hover {
+  background-color: #d9363e;
+}
+
+.footer {
+  padding: 40px 20px;
+}
+
+.fallback-error {
+  color: #ff4d4f;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  text-align: center;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
