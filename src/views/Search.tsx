@@ -5,6 +5,7 @@ import Header from '../components/layout/Header';
 import Main from '../components/layout/Main';
 import SearchForm from '../components/common/SearchForm';
 import CardList from '../components/common/CardList';
+import Loader from '../components/common/Loader';
 
 const BASE_URL = 'https://swapi.tech/api/';
 
@@ -52,20 +53,37 @@ class Search extends Component<unknown, SearchState> {
     }
   };
 
+  handleChangeSearch = (term: string): void => {
+    this.setState({ searchTerm: term });
+  };
+
   async componentDidMount(): Promise<void> {
     this.fetchCharacter();
+  }
+
+  async componentDidUpdate(
+    _prevProps: unknown,
+    prevState: Readonly<SearchState>
+  ): Promise<void> {
+    if (prevState.searchTerm !== this.state.searchTerm) {
+      localStorage.setItem('rss:search', this.state.searchTerm);
+      await this.fetchCharacter();
+    }
   }
 
   render() {
     return (
       <div>
         <Header>
-          <SearchForm />
+          <SearchForm
+            searchTerm={this.state.searchTerm}
+            onChangeSearch={this.handleChangeSearch}
+          />
         </Header>
         <Main>
           <h2>Characters:</h2>
           {this.state.isLoading ? (
-            <div className="loader" aria-label="Loading"></div>
+            <Loader />
           ) : (
             <CardList characters={this.state.characters} />
           )}

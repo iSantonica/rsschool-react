@@ -4,13 +4,18 @@ interface SearchFormState {
   search: string;
 }
 
-class SearchForm extends Component<unknown, SearchFormState> {
+interface SearchFormProps {
+  searchTerm: string;
+  onChangeSearch: (term: string) => void;
+}
+
+class SearchForm extends Component<SearchFormProps, SearchFormState> {
   state: SearchFormState = {
     search: '',
   };
 
   componentDidMount(): void {
-    const searchString = localStorage.getItem('rss:search');
+    const searchString = this.props.searchTerm;
     if (searchString) {
       this.setState({ search: searchString });
     }
@@ -24,7 +29,7 @@ class SearchForm extends Component<unknown, SearchFormState> {
     e.preventDefault();
     const searchString = this.state.search.trim();
     if (searchString) {
-      localStorage.setItem('rss:search', searchString);
+      this.props.onChangeSearch(searchString);
     }
   };
 

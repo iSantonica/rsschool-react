@@ -11,11 +11,15 @@ class CardList extends Component<Characters, unknown> {
     const { characters } = this.props;
     return (
       <div>
-        <ul className="card-list">
-          {characters.map((character) => (
-            <Card key={character.uid} character={character} />
-          ))}
-        </ul>
+        {characters.length ? (
+          <ul className="card-list">
+            {characters.map((character) => (
+              <Card key={character.uid} character={character} />
+            ))}
+          </ul>
+        ) : (
+          <p>No Characters to display!</p>
+        )}
       </div>
     );
   }
