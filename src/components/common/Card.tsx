@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { type SWCharacter } from '../../views/Search';
+import { type SWCharacter } from '../../types/character';
 
 interface CardProps {
   character: SWCharacter;

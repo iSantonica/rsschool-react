@@ -1,25 +1,12 @@
 import { Component } from 'react';
 
+import { type SWCharacter } from '../types/character';
 import Header from '../components/layout/Header';
 import Main from '../components/layout/Main';
 import SearchForm from '../components/common/SearchForm';
 import CardList from '../components/common/CardList';
 
 const BASE_URL = 'https://swapi.tech/api/';
-
-export interface SWCharacter {
-  uid: string;
-  properties: {
-    name: string;
-    birth_year: string;
-    eye_color: string;
-    gender: string;
-    hair_color: string;
-    skin_color: string;
-    height: string;
-    mass: string;
-  };
-}
 
 interface SearchState {
   isLoading: boolean;
