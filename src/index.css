@@ -33,13 +33,17 @@ body {
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+.main {
+  padding: 20px;
+  flex: 1;
 }
 
 button {
@@ -173,6 +177,13 @@ input:focus-visible {
   to {
     transform: rotate(360deg);
   }
+}
+
+.search-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100dvh;
 }
 
 @media (max-width: 1200px) {

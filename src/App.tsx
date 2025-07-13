@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <ErrorBoundary
-        fallback={<p className="fallback-error">Something went wrong!!!</p>}
+        fallback={<p className="fallback-error">All went wrong!!!</p>}
       >
         <Search />
       </ErrorBoundary>

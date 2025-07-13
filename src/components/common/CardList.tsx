@@ -2,12 +2,15 @@ import { Component } from 'react';
 import { type SWCharacter } from '../../types/character';
 import Card from './Card';
 
-interface Characters {
+interface CardListProps {
   characters: SWCharacter[];
+  error: boolean;
 }
 
-class CardList extends Component<Characters, unknown> {
+class CardList extends Component<CardListProps, unknown> {
   render() {
+    if (this.props.error)
+      throw new Error('Crashable: Test Error from BuggyButton!');
     const { characters } = this.props;
     return (
       <div>

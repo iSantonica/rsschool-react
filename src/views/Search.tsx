@@ -8,6 +8,7 @@ import CardList from '../components/common/CardList';
 import Loader from '../components/common/Loader';
 import Footer from '../components/layout/Footer';
 import BuggyButton from '../components/ErrorBoundary/BuggyButton';
+import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 
 const BASE_URL = 'https://swapi.tech/api/';
 
@@ -15,6 +16,7 @@ interface SearchState {
   isLoading: boolean;
   characters: SWCharacter[];
   searchTerm: string;
+  triggerError: boolean;
 }
 
 class Search extends Component<unknown, SearchState> {
@@ -27,8 +29,14 @@ class Search extends Component<unknown, SearchState> {
       isLoading: false,
       characters: [],
       searchTerm: savedSearchTerm,
+      triggerError: false,
     };
   }
+
+  handleError = () => {
+    const error = this.state.triggerError ? false : true;
+    this.setState({ triggerError: error });
+  };
 
   fetchCharacter = async (): Promise<void> => {
     const searchTerm = this.state.searchTerm;
@@ -75,7 +83,7 @@ class Search extends Component<unknown, SearchState> {
 
   render() {
     return (
-      <div>
+      <div className="search-page">
         <Header>
           <SearchForm
             searchTerm={this.state.searchTerm}
@@ -83,15 +91,28 @@ class Search extends Component<unknown, SearchState> {
           />
         </Header>
         <Main>
-          <h2>Characters:</h2>
-          {this.state.isLoading ? (
-            <Loader />
-          ) : (
-            <CardList characters={this.state.characters} />
-          )}
+          <ErrorBoundary
+            key={this.state.triggerError ? 'error' : 'no-error'}
+            fallback={
+              <p className="fallback-error">Something went wrong (test)!!!</p>
+            }
+          >
+            <h2>Characters:</h2>
+            {this.state.isLoading ? (
+              <Loader />
+            ) : (
+              <CardList
+                characters={this.state.characters}
+                error={this.state.triggerError}
+              />
+            )}
+          </ErrorBoundary>
         </Main>
         <Footer>
-          <BuggyButton />
+          <BuggyButton
+            onTriggerError={this.handleError}
+            isError={this.state.triggerError}
+          />
         </Footer>
       </div>
     );

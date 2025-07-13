@@ -1,14 +1,15 @@
 import { Component } from 'react';
 
-class BuggyButton extends Component {
-  handleClick = () => {
-    throw new Error('Error from BuggyButton!');
-  };
+interface BuggyButtonProps {
+  onTriggerError: () => void;
+  isError: boolean;
+}
 
+class BuggyButton extends Component<BuggyButtonProps, unknown> {
   render() {
     return (
-      <button className="buggy-button" onClick={this.handleClick}>
-        Destroy!
+      <button className="buggy-button" onClick={this.props.onTriggerError}>
+        {this.props.isError ? 'Repare!' : 'Destroy!'}
       </button>
     );
   }
